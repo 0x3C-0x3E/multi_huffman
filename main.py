@@ -23,6 +23,15 @@ class TreeNode:
 
 		return self.node_cost
 
+	def get_char(self):
+		if self.char == '':
+			output = []
+			for child_node in self.child_nodes:
+				output.append(child_node.get_char())
+			return output
+		else:
+			return self.char
+
 
 ROOT_NODE = TreeNode(0)
 
@@ -84,7 +93,7 @@ if __name__ == "__main__":
 	top_most_nodes = len(sorted_dict)
 
 	while top_most_nodes > 1:
-		print_debug("\nNew optimisation phase")
+		print_debug("New optimisation phase")
 
 		smallest_cost_nodes = find_n_smallest(tree_nodes, 2)
 
@@ -104,7 +113,7 @@ if __name__ == "__main__":
 
 		tree_nodes.append(parent_node)
 
-		print_debug(f"Newly generated parent_node: ['{parent_node.char}'], [{parent_node.node_cost}]")
+		print_debug(f"Newly generated parent_node: ['{parent_node.char}'], [{parent_node.node_cost}], {parent_node.get_char()}")
 
 		#TODO CHANGE THAT
 		top_most_nodes = top_most_nodes - 2 + 1
